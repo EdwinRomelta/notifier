@@ -89,7 +89,7 @@ class NotifierImpl implements Notifier {
     _lock.synchronized(() {
       _registerCount[action] = (_registerCount[action] ?? 0) - 1;
 
-      if (_registerCount[action] <= 0) {
+      if (_registerCount[action]! <= 0) {
         _actionStreamMappings[action]?.close();
 
         _registerCount.remove(action);
@@ -108,10 +108,10 @@ class _NotifierWidget extends StatefulWidget {
   final NotifierImpl notifier;
 
   const _NotifierWidget({
-    Key key,
-    @required this.action,
-    @required this.callback,
-    @required this.notifier,
+    Key? key,
+    required this.action,
+    required this.callback,
+    required this.notifier,
   }) : super(key: key);
 
   @override
@@ -134,7 +134,7 @@ class _NotifierWidgetState extends State<_NotifierWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: widget.notifier._actionStreamMappings[widget.action].stream
+      stream: widget.notifier._actionStreamMappings[widget.action]!.stream
           .asBroadcastStream(),
       builder: (context, _) {
         final data = widget.notifier._actionDataMappings[widget.action];

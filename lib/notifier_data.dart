@@ -1,9 +1,9 @@
 class NotifierData<T> {
   final bool hasData;
-  final T data;
+  final T? data;
 
   NotifierData({
-    this.hasData,
+    required this.hasData,
     this.data,
   }) : assert(hasData != null);
 

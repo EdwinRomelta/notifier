@@ -5,16 +5,13 @@ import 'package:notifier/notifier_impl.dart';
 class NotifierProvider extends InheritedWidget {
   final Notifier _notifier = NotifierImpl();
 
-  NotifierProvider({Widget child}) : super(child: child);
+  NotifierProvider({required Widget child}) : super(child: child);
 
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) {
     return true;
   }
 
-  static Notifier of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(NotifierProvider)
-            as NotifierProvider)
-        ._notifier;
-  }
+  static Notifier of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<NotifierProvider>()!._notifier;
 }
